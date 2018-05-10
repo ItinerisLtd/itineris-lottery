@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Itineris\SagePay;
+namespace Itineris\Lottery;
 
 // If this file is called directly, abort.
 if (! defined('WPINC')) {
@@ -29,6 +29,8 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
  */
 function run(): void
 {
+    $lottery = new Lottery();
+    $lottery->run();
 }
 
 run();
