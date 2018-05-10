@@ -3,19 +3,19 @@ declare(strict_types=1);
 
 namespace Itineris\Lottery\Taxonomies;
 
-use Itineris\Lottery\Lottery;
+use Itineris\Lottery\Plugin;
 
 class Draw extends AbstractTaxonomy
 {
-    public const TAXONOMY = Lottery::PREFIX . 'draw';
+    public const TAXONOMY = Plugin::PREFIX . 'draw';
 
     protected static function getName(): string
     {
-        return __('Draws', 'lottery');
+        return __('Draws', 'itineris-lottery');
     }
 
     protected static function getSingularName(): string
     {
-        return __('Draw', 'lottery');
+        return __('Draw', 'itineris-lottery');
     }
 }

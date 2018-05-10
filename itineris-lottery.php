@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name:     Lottery
+ * Plugin Name:     Itineris Lottery
  * Plugin URI:      https://www.itineris.co.uk/
  * Description:     Custom post type for lottery results
  * Version:         0.1.0
  * Author:          Itineris Limited
  * Author URI:      https://www.itineris.co.uk/
- * Text Domain:     lottery
+ * Text Domain:     itineris-lottery
  */
 
 declare(strict_types=1);
@@ -29,8 +29,8 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
  */
 function run(): void
 {
-    $lottery = new Lottery();
-    $lottery->run();
+    $plugin = new Plugin();
+    $plugin->run();
 }
 
 run();
