@@ -3,18 +3,18 @@ declare(strict_types=1);
 
 namespace Itineris\Lottery\PostTypes;
 
-use Itineris\Lottery\Lottery;
+use Itineris\Lottery\Plugin;
 
 class Winner
 {
-    public const POST_TYPE = Lottery::PREFIX . 'winner';
+    public const POST_TYPE = Plugin::PREFIX . 'winner';
 
     public static function register(): void
     {
         register_post_type(self::POST_TYPE, [
             'labels' => [
-                'name' => __('Winners', 'lottery'),
-                'singular_name' => __('Winner', 'lottery'),
+                'name' => __('Winners', 'itineris-lottery'),
+                'singular_name' => __('Winner', 'itineris-lottery'),
             ],
             'public' => defined('WP_DEBUG') && WP_DEBUG,
             'exclude_from_search' => true,

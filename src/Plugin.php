@@ -7,7 +7,7 @@ use Itineris\Lottery\PostTypes\Winner;
 use Itineris\Lottery\Taxonomies\Draw;
 use Itineris\Lottery\Taxonomies\Prize;
 
-class Lottery
+class Plugin
 {
     // i stands for itineris.
     // Using abbreviation because of post type name 20-char limit.

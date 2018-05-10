@@ -1,5 +1,5 @@
 {
-    "name": "itinerisltd/lottery",
+    "name": "itinerisltd/itineris-lottery",
     "description": "Custom post type for lottery results",
     "type": "wordpress-plugin",
     "license": "proprietary",
