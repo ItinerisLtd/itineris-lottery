@@ -1,0 +1,186 @@
+# Itineris Lottery
+
+Custom post type for lottery results
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Minimum Requirements](#minimum-requirements)
+- [Installation](#installation)
+- [CSV Importer](#csv-importer)
+  - [Requirements](#requirements)
+  - [Doesn't Matter](#doesnt-matter)
+  - [Example](#example)
+- [Public API](#public-api)
+  - [Rules](#rules)
+  - [Initializing Repositories](#initializing-repositories)
+  - [Getting Terms(Draw, Prize, Ticket)](#getting-termsdraw-prize-ticket)
+  - [Getting Results](#getting-results)
+  - [Entities\Result](#entities%5Cresult)
+- [Expectations](#expectations)
+- [Code Style](#code-style)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Minimum Requirements
+
+- PHP v7.1
+- WordPress v4.9.5
+
+## Installation
+
+```bash
+# composer.json
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:ItinerisLtd/itineris-lottery.git"
+    }
+  ]
+}
+```
+
+```bash
+$ composer require itinerisltd/itineris-lottery
+```
+
+## CSV Importer
+
+### Requirements
+
+- The first row must be lowercase headers(`draw,prize,ticket`)
+
+### Doesn't Matter
+
+- Column ordering
+- Row ordering
+- Separator
+
+### Example 
+
+```
+draw,prize,ticket
+11-Jan-2018,GPB 999 Cash,123456
+11-Jan-2018,GPB 100 Cash,100001
+11-Jan-2018,GPB 100 Cash,100002
+18-May-2018,GPB 999 Cash,123456
+18-May-2018,GPB 100 Cash,200001
+18-May-2018,GPB 100 Cash,200002
+Christmas Special,Private Jet x1,123456
+Christmas Special,Trip to Hong Kong,abcd1234
+Christmas Special,Honda Civic,Santa Claus
+```
+
+See also: [example.csv](./example.csv)
+
+## Public API
+
+### Rules
+
+Draws, prizes, tickets and results are custom taxonomies and custom post type. 
+Although you can **read** them via WordPress functions(e.g: `WP_Query`), you should prefer using [`Repositories`](./src/Repositories) over WordPress functions. 
+
+
+For **write** operations, only use the followings:
+ - the importer page on WP admin dashboard
+ - `ResultRepo::findOrCreate`
+ - `CSVImporter::import`
+
+Do not attempt to insert a result by other methods **including WordPress functions**.
+
+
+Except classes under [`Repositories`](./src/Repositories) and [`Entities`](./src/Entities) namespaces, consider all other classes are internal APIs, i.e: don't use them.
+
+### Initializing Repositories
+
+```php
+use Itineris\Lottery\Repositories\Factory;
+
+[
+    'resultRepo' => $resultRepo,
+    'drawRepo' => $drawRepo,
+    'prizeRepo' => $prizeRepo,
+    'ticketRepo' => $ticketRepo,
+] = Factory::make();
+```
+
+### Getting Terms(Draw, Prize, Ticket)
+
+```php
+$draw = $drawRepo->findByName('Christmas Special');
+// If 'Christmas Special' doesn't exist, $draw === null 
+// Otherwise, $draw is an Entities\Draw instance.
+
+$draw->getName();
+// 'Christmas Special'
+```
+
+```php
+use Itineris\Lottery\Entities\Draw;
+
+$draws = $drawRepo->all();
+// Array of Entities\Draw instances.
+// Only draws with one or more results will be returned.
+// Draws without any results will not be returned.
+
+$drawNames = array_map(function(Draw $draw): string {
+    return $draw->getName();
+}, $draws);
+// ['11-Jan-2018', '18-May-2018', 'Christmas Special'];
+```
+
+`Draw`, `Prize` and `Ticket` all work the same way.
+
+### Getting Results
+
+```php
+// Get all results of `Christmas Special`.
+$christmasSpecialDraw = $drawRepo->findByName('Christmas Special');
+$results = $resultRepo->whereTerms($christmasSpecialDraw);
+// Array of Entities\Result instances.
+
+
+// Get all `GPB 100 Cash` results on `11-Jan-2018`.
+$draw = $drawRepo->findByName('11-Jan-2018');
+$prize = $prizeRepo->findByName('GPB 100 Cash');
+$results = $resultRepo->whereTerms($draw, $prize);
+// Array of Entities\Result instances.
+
+
+// Get results by ticket.
+$ticket = $ticketRepo->findByName('123456');
+$results = $resultRepo->whereTerms($ticket);
+// Array of Entities\Result instances.
+```
+
+### Entities\Result
+
+```
+$resultArray = $resultRepo->whereTerms($xxx);
+$result = $resultArray[0];
+
+$result->getDraw();
+// An Entities\Draw instance.
+
+$result->getPrize();
+// An Entities\Prize instance.
+
+$result->getTicket();
+// An Entities\Ticket instance.
+```
+
+## Expectations
+
+- Less than 100 results per draw
+- Less than 500 rows per file when using the CSV importer page
+- A caching plugin is caching `WP_Query`([Advanced Post Cache](https://github.com/Automattic/advanced-post-cache/) caches all queries by this plugin) 
+
+These are not hard limits. 
+Maximum number of results per draw and rows per CSV file depends on server resources and configurations.
+
+## Code Style
+
+Check your code style with `$ composer check-style`. It's a mix of PSR-1, PSR-2, PSR-4 and [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards).
+Change [ruleset.xml](./ruleset.xml) when necessary.
