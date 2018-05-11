@@ -1,11 +1,20 @@
 # Change Log
 
+## [0.1.2](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.2) (2018-05-12)
+[Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.1...0.1.2)
+
+**Merged pull requests:**
+
+- Add `README.md` and `example.csv` [\#11](https://github.com/ItinerisLtd/itineris-lottery/pull/11) ([TangRufus](https://github.com/TangRufus))
+
 ## [0.1.1](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.1) (2018-05-11)
 [Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.0...0.1.1)
 
 **Merged pull requests:**
 
+- Version bump 0.1.1 [\#10](https://github.com/ItinerisLtd/itineris-lottery/pull/10) ([TangRufus](https://github.com/TangRufus))
 - Allow csv upload [\#9](https://github.com/ItinerisLtd/itineris-lottery/pull/9) ([TangRufus](https://github.com/TangRufus))
+- Do not run importer when uplaod fail [\#8](https://github.com/ItinerisLtd/itineris-lottery/pull/8) ([TangRufus](https://github.com/TangRufus))
 
 ## [0.1.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.0) (2018-05-11)
 **Merged pull requests:**
