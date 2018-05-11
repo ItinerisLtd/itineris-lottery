@@ -7,7 +7,7 @@ use Itineris\Lottery\PostTypes\Result;
 
 abstract class AbstractTaxonomy
 {
-    public const TAXONOMY = 'define me in child class';
+    public const TAXONOMY = 'TODO: Define taxonomy in child class';
 
     public static function register(): void
     {
@@ -16,7 +16,7 @@ abstract class AbstractTaxonomy
                 'name' => static::getName(),
                 'singular_name' => static::getSingularName(),
             ],
-            'public' => defined('WP_DEBUG') && WP_DEBUG,
+            'public' => true,
             'publicly_queryable' => false,
             'show_in_nav_menus' => false,
             'show_tagcloud' => false,
