@@ -5,7 +5,9 @@
     "license": "proprietary",
     "require": {
         "php": "^7.2",
-        "composer/installers": "^1.4"
+        "composer/installers": "^1.4",
+        "league/csv": "^9.1",
+        "typisttech/wp-better-settings": "dev-master#5c078c2"
     },
     "autoload": {
         "psr-4": {
