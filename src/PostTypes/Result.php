@@ -16,7 +16,7 @@ class Result
                 'name' => __('Lottery Results', 'itineris-lottery'),
                 'singular_name' => __('Lottery Result', 'itineris-lottery'),
             ],
-            'public' => defined('WP_DEBUG') && WP_DEBUG,
+            'public' => true,
             'exclude_from_search' => true,
             'publicly_queryable' => false,
             'show_in_nav_menus' => false,
