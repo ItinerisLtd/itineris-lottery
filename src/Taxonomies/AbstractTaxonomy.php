@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Itineris\Lottery\Taxonomies;
 
-use Itineris\Lottery\PostTypes\Winner;
+use Itineris\Lottery\PostTypes\Result;
 
 abstract class AbstractTaxonomy
 {
@@ -11,7 +11,7 @@ abstract class AbstractTaxonomy
 
     public static function register(): void
     {
-        register_taxonomy(static::TAXONOMY, [Winner::POST_TYPE], [
+        register_taxonomy(static::TAXONOMY, [Result::POST_TYPE], [
             'labels' => [
                 'name' => static::getName(),
                 'singular_name' => static::getSingularName(),
@@ -26,7 +26,7 @@ abstract class AbstractTaxonomy
             'rewrite' => false,
         ]);
 
-        register_taxonomy_for_object_type(static::TAXONOMY, Winner::POST_TYPE);
+        register_taxonomy_for_object_type(static::TAXONOMY, Result::POST_TYPE);
     }
 
     abstract protected static function getName(): string;
