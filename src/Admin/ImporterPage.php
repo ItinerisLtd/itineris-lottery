@@ -63,7 +63,7 @@ class ImporterPage
         );
     }
 
-    public static function handleFormSubmit($_input, $oldValue)
+    public static function import($_input, $oldValue)
     {
         if (empty($_FILES)) { // Input var okay.
             return $oldValue;

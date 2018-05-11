@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Itineris\Lottery;
 
+use Itineris\Lottery\Admin\UploadMimes;
 use Itineris\Lottery\Admin\ImporterPage;
 use Itineris\Lottery\PostTypes\Result;
 use Itineris\Lottery\Taxonomies\Draw;
@@ -26,6 +27,7 @@ class Plugin
 
         add_action('admin_init', [ImporterPage::class, 'registerSettings']);
         add_action('admin_menu', [ImporterPage::class, 'addSubmenuPage']);
-        add_filter('pre_update_option_' . ImporterPage::CSV_FILE_OPTION_ID, [ImporterPage::class, 'handleFormSubmit'], 10, 2);
+        add_filter('pre_update_option_' . ImporterPage::CSV_FILE_OPTION_ID, [ImporterPage::class, 'import'], 10, 2);
+        add_filter('upload_mimes', [UploadMimes::class, 'allowCSV']);
     }
 }
