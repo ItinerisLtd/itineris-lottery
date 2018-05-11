@@ -17,6 +17,7 @@ class Plugin
     public function run(): void
     {
         add_action('init', [Result::class, 'register']);
+        add_filter('manage_edit-' . Result::POST_TYPE . '_columns', [Result::class, 'hideTitleColumn']);
         add_action('init', [Draw::class, 'register']);
         add_action('init', [Prize::class, 'register']);
         add_action('init', [Ticket::class, 'register']);
