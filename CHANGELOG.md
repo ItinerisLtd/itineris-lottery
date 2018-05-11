@@ -1,8 +1,16 @@
 # Change Log
 
+## [0.1.1](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.1) (2018-05-11)
+[Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.0...0.1.1)
+
+**Merged pull requests:**
+
+- Allow csv upload [\#9](https://github.com/ItinerisLtd/itineris-lottery/pull/9) ([TangRufus](https://github.com/TangRufus))
+
 ## [0.1.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.0) (2018-05-11)
 **Merged pull requests:**
 
+- Version bump 0.1.0 [\#7](https://github.com/ItinerisLtd/itineris-lottery/pull/7) ([TangRufus](https://github.com/TangRufus))
 - New Feature: CSV import [\#6](https://github.com/ItinerisLtd/itineris-lottery/pull/6) ([TangRufus](https://github.com/TangRufus))
 - Limit access from WP admin dashboard [\#5](https://github.com/ItinerisLtd/itineris-lottery/pull/5) ([TangRufus](https://github.com/TangRufus))
 - First working version [\#4](https://github.com/ItinerisLtd/itineris-lottery/pull/4) ([TangRufus](https://github.com/TangRufus))
