@@ -15,11 +15,6 @@
         }
     },
     "scripts": {
-        "build": [
-            "rm -fr vendor",
-            "composer install --no-dev --prefer-dist --optimize-autoloader --no-suggest",
-            "composer archive --format=zip --dir=release --file=lottery"
-        ],
         "check-style": "phpcs --standard=ruleset.xml --colors -p -s"
     },
     "config": {
