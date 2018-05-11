@@ -6,6 +6,7 @@ namespace Itineris\Lottery;
 use Itineris\Lottery\PostTypes\Result;
 use Itineris\Lottery\Taxonomies\Draw;
 use Itineris\Lottery\Taxonomies\Prize;
+use Itineris\Lottery\Taxonomies\Ticket;
 
 class Plugin
 {
@@ -18,5 +19,6 @@ class Plugin
         add_action('init', [Result::class, 'register']);
         add_action('init', [Draw::class, 'register']);
         add_action('init', [Prize::class, 'register']);
+        add_action('init', [Ticket::class, 'register']);
     }
 }
