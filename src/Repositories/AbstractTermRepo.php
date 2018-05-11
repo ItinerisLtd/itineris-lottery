@@ -10,7 +10,7 @@ use WP_Term;
 
 abstract class AbstractTermRepo
 {
-    public function findOrCreateByName(string $name)
+    public function findOrCreateByName(string $name): AbstractTerm
     {
         $term = $this->findByName($name);
         if (null !== $term) {
