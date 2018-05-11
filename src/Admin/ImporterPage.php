@@ -85,6 +85,8 @@ class ImporterPage
                 $moveFile['error'],
                 'error'
             );
+
+            return $oldValue;
         }
 
         $csvPath = $moveFile['file'];
