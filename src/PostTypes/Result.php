@@ -13,8 +13,8 @@ class Result
     {
         register_post_type(self::POST_TYPE, [
             'labels' => [
-                'name' => __('Results', 'itineris-lottery'),
-                'singular_name' => __('Result', 'itineris-lottery'),
+                'name' => __('Lottery Results', 'itineris-lottery'),
+                'singular_name' => __('Lottery Result', 'itineris-lottery'),
             ],
             'public' => defined('WP_DEBUG') && WP_DEBUG,
             'exclude_from_search' => true,
