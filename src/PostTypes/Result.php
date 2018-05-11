@@ -27,4 +27,11 @@ class Result
             'can_export' => false,
         ]);
     }
+
+    public static function hideTitleColumn(array $columns): array
+    {
+        unset($columns['title']);
+
+        return $columns;
+    }
 }
