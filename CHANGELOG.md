@@ -1,11 +1,26 @@
 # Change Log
 
-## [0.1.2](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.2) (2018-05-12)
+## [0.1.3](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.3) (2018-05-16)
+[Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.2...0.1.3)
+
+**Closed issues:**
+
+- Feedback 14-05-2018 [\#13](https://github.com/ItinerisLtd/itineris-lottery/issues/13)
+
+**Merged pull requests:**
+
+- Remove add new link from WP admin dashboard [\#16](https://github.com/ItinerisLtd/itineris-lottery/pull/16) ([TangRufus](https://github.com/TangRufus))
+- Disallow deleting draws [\#15](https://github.com/ItinerisLtd/itineris-lottery/pull/15) ([TangRufus](https://github.com/TangRufus))
+- \[WIP\] Set taxonomies to be public [\#14](https://github.com/ItinerisLtd/itineris-lottery/pull/14) ([TangRufus](https://github.com/TangRufus))
+
+## [0.1.2](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.2) (2018-05-11)
 [Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.1...0.1.2)
 
 **Merged pull requests:**
 
+- Version bump 0.1.2 [\#12](https://github.com/ItinerisLtd/itineris-lottery/pull/12) ([TangRufus](https://github.com/TangRufus))
 - Add `README.md` and `example.csv` [\#11](https://github.com/ItinerisLtd/itineris-lottery/pull/11) ([TangRufus](https://github.com/TangRufus))
+- Do not run importer when uplaod fail [\#8](https://github.com/ItinerisLtd/itineris-lottery/pull/8) ([TangRufus](https://github.com/TangRufus))
 
 ## [0.1.1](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.1) (2018-05-11)
 [Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.0...0.1.1)
@@ -14,7 +29,6 @@
 
 - Version bump 0.1.1 [\#10](https://github.com/ItinerisLtd/itineris-lottery/pull/10) ([TangRufus](https://github.com/TangRufus))
 - Allow csv upload [\#9](https://github.com/ItinerisLtd/itineris-lottery/pull/9) ([TangRufus](https://github.com/TangRufus))
-- Do not run importer when uplaod fail [\#8](https://github.com/ItinerisLtd/itineris-lottery/pull/8) ([TangRufus](https://github.com/TangRufus))
 
 ## [0.1.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.0) (2018-05-11)
 **Merged pull requests:**
