@@ -19,6 +19,7 @@ Custom post type for lottery results
   - [Getting Results](#getting-results)
   - [Entities\Result](#entities%5Cresult)
 - [Expectations](#expectations)
+- [Capabilities](#capabilities)
 - [Code Style](#code-style)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -179,6 +180,16 @@ $result->getTicket();
 
 These are not hard limits. 
 Maximum number of results per draw and rows per CSV file depends on server resources and configurations.
+
+## Capabilities
+
+To delete `draws`, you need `manage_draws` capability.
+By default, nobody is granted this capability.
+
+With great power comes great responsibility:
+
+A `result` must tie to a `draw`. You should only delete **orphan** `draws`.
+Otherwise, fatal errors are guaranteed. Thus, `manage_draws` capability is intended for developers only.
 
 ## Code Style
 

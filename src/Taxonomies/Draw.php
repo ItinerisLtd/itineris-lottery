@@ -22,6 +22,9 @@ class Draw
             'show_admin_column' => true,
             'query_var' => false,
             'rewrite' => false,
+            'capabilities' => [
+                'delete_terms' => 'manage_draws',
+            ],
         ]);
 
         register_taxonomy_for_object_type(static::TAXONOMY, Result::POST_TYPE);
