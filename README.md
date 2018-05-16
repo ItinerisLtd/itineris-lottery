@@ -165,11 +165,20 @@ $result = $resultArray[0];
 $result->getDraw();
 // An Entities\Draw instance.
 
+$result->getDrawName();
+// Same as $result->getDraw()->getName();
+
+$result->getDrawId();
+// Same as $result->getDraw()->getId();
+
+// Similar methods:
 $result->getPrize();
-// An Entities\Prize instance.
+$result->getPrizeName();
+$result->getPrizeId();
 
 $result->getTicket();
-// An Entities\Ticket instance.
+$result->getTicketId();
+$result->getTicketName();
 ```
 
 ## Expectations

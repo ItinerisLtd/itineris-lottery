@@ -27,13 +27,43 @@ class Result
         return $this->draw;
     }
 
+    public function getDrawName(): string
+    {
+        return $this->getDraw()->getName();
+    }
+
+    public function getDrawId(): int
+    {
+        return $this->getDraw()->getId();
+    }
+
     public function getPrize(): Prize
     {
         return $this->prize;
     }
 
+    public function getPrizeName(): string
+    {
+        return $this->getPrize()->getName();
+    }
+
+    public function getPrizeId(): int
+    {
+        return $this->getPrize()->getId();
+    }
+
     public function getTicket(): Ticket
     {
         return $this->ticket;
+    }
+
+    public function getTicketName(): string
+    {
+        return $this->getTicket()->getName();
+    }
+
+    public function getTicketId(): int
+    {
+        return $this->getTicket()->getId();
     }
 }
