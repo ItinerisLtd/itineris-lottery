@@ -7,7 +7,7 @@ use Itineris\Lottery\PostTypes\Result;
 
 abstract class AbstractTaxonomy
 {
-    public const TAXONOMY = 'TODO: Define taxonomy in child class';
+    public const TAXONOMY = self::TAXONOMY;
 
     public static function register(): void
     {

@@ -22,14 +22,14 @@ class Result
         return $this->id;
     }
 
-    public function getDraw(): Draw
-    {
-        return $this->draw;
-    }
-
     public function getDrawName(): string
     {
         return $this->getDraw()->getName();
+    }
+
+    public function getDraw(): Draw
+    {
+        return $this->draw;
     }
 
     public function getDrawId(): int
@@ -37,14 +37,14 @@ class Result
         return $this->getDraw()->getId();
     }
 
-    public function getPrize(): Prize
-    {
-        return $this->prize;
-    }
-
     public function getPrizeName(): string
     {
         return $this->getPrize()->getName();
+    }
+
+    public function getPrize(): Prize
+    {
+        return $this->prize;
     }
 
     public function getPrizeId(): int
@@ -52,14 +52,14 @@ class Result
         return $this->getPrize()->getId();
     }
 
-    public function getTicket(): Ticket
-    {
-        return $this->ticket;
-    }
-
     public function getTicketName(): string
     {
         return $this->getTicket()->getName();
+    }
+
+    public function getTicket(): Ticket
+    {
+        return $this->ticket;
     }
 
     public function getTicketId(): int
