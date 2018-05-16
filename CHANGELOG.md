@@ -1,5 +1,13 @@
 # Change Log
 
+## [0.1.4](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.4) (2018-05-17)
+[Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.3...0.1.4)
+
+**Merged pull requests:**
+
+- Minor refactors [\#20](https://github.com/ItinerisLtd/itineris-lottery/pull/20) ([TangRufus](https://github.com/TangRufus))
+- Add `Entities\Result::getXxxName` and `Entities\Result::getXxxId` [\#18](https://github.com/ItinerisLtd/itineris-lottery/pull/18) ([TangRufus](https://github.com/TangRufus))
+
 ## [0.1.3](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.3) (2018-05-16)
 [Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.2...0.1.3)
 
@@ -9,9 +17,10 @@
 
 **Merged pull requests:**
 
+- Version bump 0.1.3 [\#17](https://github.com/ItinerisLtd/itineris-lottery/pull/17) ([TangRufus](https://github.com/TangRufus))
 - Remove add new link from WP admin dashboard [\#16](https://github.com/ItinerisLtd/itineris-lottery/pull/16) ([TangRufus](https://github.com/TangRufus))
 - Disallow deleting draws [\#15](https://github.com/ItinerisLtd/itineris-lottery/pull/15) ([TangRufus](https://github.com/TangRufus))
-- \[WIP\] Set taxonomies to be public [\#14](https://github.com/ItinerisLtd/itineris-lottery/pull/14) ([TangRufus](https://github.com/TangRufus))
+- Set taxonomies to be public [\#14](https://github.com/ItinerisLtd/itineris-lottery/pull/14) ([TangRufus](https://github.com/TangRufus))
 
 ## [0.1.2](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.2) (2018-05-11)
 [Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.1...0.1.2)
