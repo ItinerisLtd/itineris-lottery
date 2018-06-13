@@ -1,10 +1,23 @@
 # Change Log
 
+## [0.3.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.3.0) (2018-06-13)
+[Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.2.0...0.3.0)
+
+**Closed issues:**
+
+- Non UTF-8 File Encoding issues [\#21](https://github.com/ItinerisLtd/itineris-lottery/issues/21)
+
+**Merged pull requests:**
+
+- `CSVImporter`: Handle Non UTF-8 characters [\#25](https://github.com/ItinerisLtd/itineris-lottery/pull/25) ([TangRufus](https://github.com/TangRufus))
+- Refactor `CSVImporter` [\#24](https://github.com/ItinerisLtd/itineris-lottery/pull/24) ([TangRufus](https://github.com/TangRufus))
+
 ## [0.2.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.2.0) (2018-06-13)
 [Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.4...0.2.0)
 
 **Merged pull requests:**
 
+- Version bump 0.2.0 [\#23](https://github.com/ItinerisLtd/itineris-lottery/pull/23) ([TangRufus](https://github.com/TangRufus))
 - CSVImporter: Ignore totally empty rows [\#22](https://github.com/ItinerisLtd/itineris-lottery/pull/22) ([TangRufus](https://github.com/TangRufus))
 
 ## [0.1.4](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.4) (2018-05-16)
