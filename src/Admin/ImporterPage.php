@@ -5,7 +5,6 @@ namespace Itineris\Lottery\Admin;
 
 use AdamWathan\Form\FormBuilder;
 use Itineris\Lottery\Importers\Counter;
-use Itineris\Lottery\Importers\CSVImporter;
 use Itineris\Lottery\Importers\Factory;
 use Itineris\Lottery\Plugin;
 use Itineris\Lottery\PostTypes\Result;
@@ -92,19 +91,18 @@ class ImporterPage
 
         $csvPath = $moveFile['file'];
 
-        [
-            'csvImporter' => $csvImporter,
-            'counter' => $counter,
-        ] = Factory::make($csvPath);
+        $csvImporter = Factory::make();
 
-        /* @var CSVImporter $csvImporter The CSV importer. */
-        $csvImporter->import();
+        $csvImporter->import($csvPath);
 
-        /* @var Counter $counter The import counter. */
+        $message = self::getMessage(
+            $csvImporter->getCounter()
+        );
+
         add_settings_error(
-            self::CSV_FILE_OPTION_ID,
-            self::CSV_FILE_OPTION_ID,
-            self::getMessage($counter),
+            self::SLUG,
+            esc_attr('settings_updated'),
+            $message,
             'updated'
         );
 

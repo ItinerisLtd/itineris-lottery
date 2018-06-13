@@ -8,20 +8,18 @@ use League\Csv\Reader;
 
 class CSVImporter
 {
-    private $path;
     private $resultRepo;
     private $counter;
 
-    public function __construct(string $path, ResultRepo $resultRepo, Counter $counter)
+    public function __construct(ResultRepo $resultRepo, Counter $counter)
     {
-        $this->path = $path;
         $this->resultRepo = $resultRepo;
         $this->counter = $counter;
     }
 
-    public function import(): void
+    public function import(string $path): void
     {
-        $reader = Reader::createFromPath($this->path);
+        $reader = Reader::createFromPath($path);
         $reader->setHeaderOffset(0);
 
         $records = $reader->getRecords();
@@ -40,5 +38,10 @@ class CSVImporter
             $this->resultRepo->findOrCreate($draw, $prize, $ticket);
             $this->counter->increaseSuccessful();
         }
+    }
+
+    public function getCounter(): Counter
+    {
+        return $this->counter;
     }
 }
