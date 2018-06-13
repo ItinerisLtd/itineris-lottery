@@ -7,6 +7,7 @@
         "php": "^7.2",
         "composer/installers": "^1.4",
         "league/csv": "^9.1",
+        "neitanod/forceutf8": "^2.0",
         "typisttech/wp-better-settings": "^0.14.0"
     },
     "autoload": {

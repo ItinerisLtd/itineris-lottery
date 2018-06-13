@@ -11,7 +11,9 @@ Custom post type for lottery results
 - [CSV Importer](#csv-importer)
   - [Requirements](#requirements)
   - [Doesn't Matter](#doesnt-matter)
-  - [Example](#example)
+  - [Empty Rows](#empty-rows)
+  - [Encoding](#encoding)
+  - [Good Example](#good-example)
 - [Public API](#public-api)
   - [Rules](#rules)
   - [Initializing Repositories](#initializing-repositories)
@@ -52,27 +54,51 @@ $ composer require itinerisltd/itineris-lottery
 ### Requirements
 
 - The first row must be lowercase headers(`draw,prize,ticket`)
-- Rows can't be partially empty(e.g: `x,,` / `,y,` / `,,z`)
 
 ### Doesn't Matter
 
 - Column ordering
 - Row ordering
 - Separator
-- Totally empty rows(e.g: `,,`)
 
-### Example 
+### Empty Rows
 
+Totally empty rows(e.g: `,,`) will be ignored.
+You should double check with the exporter whether these empty rows are bugs.
+
+
+Rows can't be partially empty.
+For example, these rows will make the importation fails:
+```csv
+draw,prize,ticket
+11-Jan-2018,,
+,GPB 100 Cash,
+,,100002
+18-May-2018,,123456
+18-May-2018,GPB 100 Cash,
+,GPB 100 Cash,200002
 ```
+
+### Encoding
+
+Preferred encoding is `UTF-8`. 
+Non UTF-8 characters will either be converted or stripped.
+
+### Good Example 
+
+```csv
 draw,prize,ticket
 11-Jan-2018,GPB 999 Cash,123456
 11-Jan-2018,GPB 100 Cash,100001
+,,
+,,
 11-Jan-2018,GPB 100 Cash,100002
 18-May-2018,GPB 999 Cash,123456
 18-May-2018,GPB 100 Cash,200001
 18-May-2018,GPB 100 Cash,200002
 Christmas Special,Private Jet x1,123456
 Christmas Special,Trip to Hong Kong,abcd1234
+,,
 Christmas Special,Honda Civic,Santa Claus
 ```
 
