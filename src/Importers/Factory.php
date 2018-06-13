@@ -8,7 +8,7 @@ use Itineris\Lottery\Repositories\Factory as RepoFactory;
 
 class Factory
 {
-    public static function make(string $csvPath): array
+    public static function make(): CSVImporter
     {
         [
             'resultRepo' => $resultRepo,
@@ -16,12 +16,6 @@ class Factory
 
         $counter = new Counter();
 
-        $csvImporter = new CSVImporter($csvPath, $resultRepo, $counter);
-
-        return [
-            'csvImporter' => $csvImporter,
-            'counter' => $counter,
-            'resultRepo' => $resultRepo,
-        ];
+        return new CSVImporter($resultRepo, $counter);
     }
 }
