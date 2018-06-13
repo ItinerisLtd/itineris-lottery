@@ -1,11 +1,19 @@
 # Change Log
 
-## [0.1.4](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.4) (2018-05-17)
+## [0.2.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.2.0) (2018-06-13)
+[Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.4...0.2.0)
+
+**Merged pull requests:**
+
+- CSVImporter: Ignore totally empty rows [\#22](https://github.com/ItinerisLtd/itineris-lottery/pull/22) ([TangRufus](https://github.com/TangRufus))
+
+## [0.1.4](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.4) (2018-05-16)
 [Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.1.3...0.1.4)
 
 **Merged pull requests:**
 
 - Minor refactors [\#20](https://github.com/ItinerisLtd/itineris-lottery/pull/20) ([TangRufus](https://github.com/TangRufus))
+- Version bump 0.1.4 [\#19](https://github.com/ItinerisLtd/itineris-lottery/pull/19) ([TangRufus](https://github.com/TangRufus))
 - Add `Entities\Result::getXxxName` and `Entities\Result::getXxxId` [\#18](https://github.com/ItinerisLtd/itineris-lottery/pull/18) ([TangRufus](https://github.com/TangRufus))
 
 ## [0.1.3](https://github.com/ItinerisLtd/itineris-lottery/tree/0.1.3) (2018-05-16)
