@@ -4,10 +4,11 @@ declare(strict_types=1);
 namespace Itineris\Lottery\Admin;
 
 use AdamWathan\Form\FormBuilder;
+use Itineris\Lottery\Importers\Counter;
 use Itineris\Lottery\Importers\CSVImporter;
+use Itineris\Lottery\Importers\Factory;
 use Itineris\Lottery\Plugin;
 use Itineris\Lottery\PostTypes\Result;
-use Itineris\Lottery\Repositories\Factory;
 use TypistTech\WPBetterSettings\Field;
 use TypistTech\WPBetterSettings\Registrar;
 use TypistTech\WPBetterSettings\Section;
@@ -92,12 +93,41 @@ class ImporterPage
         $csvPath = $moveFile['file'];
 
         [
-            'resultRepo' => $resultRepo,
-        ] = Factory::make();
+            'csvImporter' => $csvImporter,
+            'counter' => $counter,
+        ] = Factory::make($csvPath);
 
-        $csvImporter = new CSVImporter($csvPath, $resultRepo);
+        /* @var CSVImporter $csvImporter The CSV importer. */
         $csvImporter->import();
 
+        /* @var Counter $counter The import counter. */
+        add_settings_error(
+            self::CSV_FILE_OPTION_ID,
+            self::CSV_FILE_OPTION_ID,
+            self::getMessage($counter),
+            'updated'
+        );
+
         return $oldValue;
+    }
+
+    private static function getMessage(Counter $counter): string
+    {
+        $message = sprintf(
+            // Translators: %1$d is the number of successful imported rows.
+            __('%1$d row(s) imported.', 'itineris-lottery'),
+            $counter->getSuccessful()
+        );
+
+        if ($counter->getIgnored() > 0) {
+            $message .= '<br />';
+            $message .= sprintf(
+                // Translators: %1$d is the number of ignored imported rows.
+                __('%1$d row(s) ignored because they are totally empty.', 'itineris-lottery'),
+                $counter->getIgnored()
+            );
+        }
+
+        return $message;
     }
 }

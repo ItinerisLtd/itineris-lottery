@@ -52,12 +52,14 @@ $ composer require itinerisltd/itineris-lottery
 ### Requirements
 
 - The first row must be lowercase headers(`draw,prize,ticket`)
+- Rows can't be partially empty(e.g: `x,,` / `,y,` / `,,z`)
 
 ### Doesn't Matter
 
 - Column ordering
 - Row ordering
 - Separator
+- Totally empty rows(e.g: `,,`)
 
 ### Example 
 
