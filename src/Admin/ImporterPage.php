@@ -5,6 +5,7 @@ namespace Itineris\Lottery\Admin;
 
 use AdamWathan\Form\FormBuilder;
 use Itineris\Lottery\Importers\Counter;
+use Itineris\Lottery\Importers\Encoder;
 use Itineris\Lottery\Importers\Factory;
 use Itineris\Lottery\Plugin;
 use Itineris\Lottery\PostTypes\Result;
@@ -63,65 +64,112 @@ class ImporterPage
         );
     }
 
-    public static function import($_input, $oldValue)
+    public static function handleFormSubmit($_input, $oldValue)
+    {
+        [
+            'error' => $message,
+            'success' => $uploadSuccess,
+            'path' => $csvFilePath,
+        ] = self::handleUpload();
+
+        if ($uploadSuccess) {
+            $message = self::encodeAndImport($csvFilePath);
+        }
+
+        add_settings_error(
+            self::SLUG,
+            esc_attr('settings_updated'),
+            $message,
+            $uploadSuccess ? 'updated' : 'error'
+        );
+
+        return $oldValue;
+    }
+
+    private static function handleUpload(): array
     {
         if (empty($_FILES)) { // Input var okay.
-            return $oldValue;
+            return [
+                'success' => false,
+                'error' => esc_html__('Failed to accept CSV file. $_FILES is empty.', 'itineris-lottery'),
+                'path' => null,
+            ];
         }
 
         $files = wp_unslash($_FILES); // Input var okay.
         $file = $files[self::CSV_FILE_OPTION_ID];
 
         if (empty($file)) {
-            return $oldValue;
+            return [
+                'success' => false,
+                'error' => esc_html__(
+                    'Failed to accept CSV file. $files[self::CSV_FILE_OPTION_ID] is empty.',
+                    'itineris-lottery'
+                ),
+                'path' => null,
+            ];
         }
 
         $moveFile = wp_handle_upload($file, ['test_form' => false]);
 
         if (! is_array($moveFile) || isset($moveFile['error'])) {
-            add_settings_error(
-                self::SLUG,
-                esc_attr('settings_updated'),
-                $moveFile['error'],
-                'error'
-            );
-
-            return $oldValue;
+            return [
+                'success' => false,
+                'error' => $moveFile['error'],
+                'path' => null,
+            ];
         }
 
-        $csvPath = $moveFile['file'];
-
-        $csvImporter = Factory::make();
-
-        $csvImporter->import($csvPath);
-
-        $message = self::getMessage(
-            $csvImporter->getCounter()
-        );
-
-        add_settings_error(
-            self::SLUG,
-            esc_attr('settings_updated'),
-            $message,
-            'updated'
-        );
-
-        return $oldValue;
+        return [
+            'success' => true,
+            'error' => null,
+            'path' => $moveFile['file'],
+        ];
     }
 
-    private static function getMessage(Counter $counter): string
+    private static function encodeAndImport($csvPath): string
     {
-        $message = sprintf(
-            // Translators: %1$d is the number of successful imported rows.
-            __('%1$d row(s) imported.', 'itineris-lottery'),
+        $isEncoded = Encoder::forceUFT8($csvPath);
+
+        $csvImporter = Factory::make();
+        $csvImporter->import($csvPath);
+
+        return self::getMessage(
+            $isEncoded,
+            $csvImporter->getCounter()
+        );
+    }
+
+    private static function getMessage(bool $isEncoded, Counter $counter): string
+    {
+        $message = esc_html__(
+            'Warning: Unable to convert the CSV file into UTF-8 encoding. Process anyway.',
+            'itineris-lottery'
+        );
+        if ($isEncoded) {
+            $message = esc_html__(
+                'Success: The CSV files was forced to UTF-8 encoding.',
+                'itineris-lottery'
+            );
+        }
+
+        // Translators: %1$d is the number of successful imported rows.
+        $successfulCountMessageFormat = esc_html__('Success: %1$d row(s) imported.', 'itineris-lottery');
+        $message .= '<br />';
+        $message .= sprintf(
+            $successfulCountMessageFormat,
             $counter->getSuccessful()
         );
 
         if ($counter->getIgnored() > 0) {
+            // Translators: %1$d is the number of ignored imported rows.
+            $ignoredCountMessageFormat = esc_html__(
+                'Warning: %1$d row(s) ignored because they are totally empty.',
+                'itineris-lottery'
+            );
             $message .= '<br />';
             $message .= sprintf(
-                // Translators: %1$d is the number of ignored imported rows.
-                __('%1$d row(s) ignored because they are totally empty.', 'itineris-lottery'),
+                $ignoredCountMessageFormat,
                 $counter->getIgnored()
             );
         }
