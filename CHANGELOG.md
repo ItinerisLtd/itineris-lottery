@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.4.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.4.0) (2018-06-22)
+[Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.3.0...0.4.0)
+
+**Merged pull requests:**
+
+- Add winner field [\#27](https://github.com/ItinerisLtd/itineris-lottery/pull/27) ([TangRufus](https://github.com/TangRufus))
+
 ## [0.3.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.3.0) (2018-06-13)
 [Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.2.0...0.3.0)
 
@@ -9,6 +16,7 @@
 
 **Merged pull requests:**
 
+- Version bump 0.3.0 [\#26](https://github.com/ItinerisLtd/itineris-lottery/pull/26) ([TangRufus](https://github.com/TangRufus))
 - `CSVImporter`: Handle Non UTF-8 characters [\#25](https://github.com/ItinerisLtd/itineris-lottery/pull/25) ([TangRufus](https://github.com/TangRufus))
 - Refactor `CSVImporter` [\#24](https://github.com/ItinerisLtd/itineris-lottery/pull/24) ([TangRufus](https://github.com/TangRufus))
 
