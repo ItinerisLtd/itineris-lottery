@@ -8,13 +8,15 @@ class Result
     private $draw;
     private $prize;
     private $ticket;
+    private $winner;
 
-    public function __construct(int $id, Draw $draw, Prize $prize, Ticket $ticket)
+    public function __construct(int $id, Draw $draw, Prize $prize, Ticket $ticket, Winner $winner)
     {
         $this->id = $id;
         $this->draw = $draw;
         $this->prize = $prize;
         $this->ticket = $ticket;
+        $this->winner = $winner;
     }
 
     public function getId(): int
@@ -65,5 +67,20 @@ class Result
     public function getTicketId(): int
     {
         return $this->getTicket()->getId();
+    }
+
+    public function getWinner(): Winner
+    {
+        return $this->winner;
+    }
+
+    public function getWinnerId(): int
+    {
+        return $this->getWinner()->getId();
+    }
+
+    public function getWinnerName(): string
+    {
+        return $this->getWinner()->getName();
     }
 }
