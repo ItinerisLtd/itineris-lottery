@@ -57,7 +57,7 @@ class ResultRepo
     private function titleFor(string $drawName, string $prizeName, string $ticketName, string $winnerName): string
     {
         return sprintf(
-            '%1$s' . self::TITLE_SEPARATOR . '%2$s' . self::TITLE_SEPARATOR . '%3$s' . self::TITLE_SEPARATOR . '%3$s',
+            '%1$s' . self::TITLE_SEPARATOR . '%2$s' . self::TITLE_SEPARATOR . '%3$s' . self::TITLE_SEPARATOR . '%4$s',
             $drawName,
             $prizeName,
             $ticketName,
