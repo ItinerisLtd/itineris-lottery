@@ -17,54 +17,63 @@ class ResultRepo
     private $drawRepo;
     private $prizeRepo;
     private $ticketRepo;
+    private $winnerRepo;
 
-    public function __construct(DrawRepo $drawRepo, PrizeRepo $prizeRepo, TicketRepo $ticketRepo)
-    {
+    public function __construct(
+        DrawRepo $drawRepo,
+        PrizeRepo $prizeRepo,
+        TicketRepo $ticketRepo,
+        WinnerRepo $winnerRepo
+    ) {
         $this->drawRepo = $drawRepo;
         $this->prizeRepo = $prizeRepo;
         $this->ticketRepo = $ticketRepo;
+        $this->winnerRepo = $winnerRepo;
     }
 
-    public function findOrCreate(string $drawName, string $prizeName, string $ticketName): Result
+    public function findOrCreate(string $drawName, string $prizeName, string $ticketName, string $winnerName): Result
     {
-        $title = $this->titleFor($drawName, $prizeName, $ticketName);
+        $title = $this->titleFor($drawName, $prizeName, $ticketName, $winnerName);
 
         [
             'draw' => $draw,
             'prize' => $prize,
             'ticket' => $ticket,
+            'winner' => $winner,
         ] = $this->findOrCreateTermsByTitle($title);
 
-        $results = $this->whereTerms($draw, $prize, $ticket);
+        $results = $this->whereTerms($draw, $prize, $ticket, $winner);
 
         if (! empty($results)) {
             return $results[0];
         }
 
-        $createResult = new CreateResult($title, $draw, $prize, $ticket);
+        $createResult = new CreateResult($title, $draw, $prize, $ticket, $winner);
         $id = $createResult->commit();
 
-        return new Result($id, $draw, $prize, $ticket);
+        return new Result($id, $draw, $prize, $ticket, $winner);
     }
 
-    private function titleFor(string $drawName, string $prizeName, string $ticketName): string
+    private function titleFor(string $drawName, string $prizeName, string $ticketName, string $winnerName): string
     {
         return sprintf(
             '%1$s' . self::TITLE_SEPARATOR . '%2$s' . self::TITLE_SEPARATOR . '%3$s',
             $drawName,
             $prizeName,
-            $ticketName
+            $ticketName,
+            $winnerName
         );
     }
 
     private function findOrCreateTermsByTitle(string $title): array
     {
-        [$drawName, $prizeName, $ticketName] = explode(self::TITLE_SEPARATOR, $title);
+        [$drawName, $prizeName, $ticketName, $winnerName] = explode(self::TITLE_SEPARATOR, $title);
 
         return [
             'draw' => $this->drawRepo->findOrCreateByName($drawName),
             'prize' => $this->prizeRepo->findOrCreateByName($prizeName),
             'ticket' => $this->ticketRepo->findOrCreateByName($ticketName),
+            'winner' => $this->winnerRepo->findOrCreateByName($winnerName),
         ];
     }
 
@@ -107,9 +116,10 @@ class ResultRepo
                 'draw' => $draw,
                 'prize' => $prize,
                 'ticket' => $ticket,
+                'winner' => $winner,
             ] = $this->findOrCreateTermsByTitle($wpPost->post_title);
 
-            return new Result($wpPost->ID, $draw, $prize, $ticket);
+            return new Result($wpPost->ID, $draw, $prize, $ticket, $winner);
         }, $rawResults);
     }
 }
