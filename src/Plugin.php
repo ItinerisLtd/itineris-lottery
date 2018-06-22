@@ -10,6 +10,7 @@ use Itineris\Lottery\PostTypes\Result;
 use Itineris\Lottery\Taxonomies\Draw;
 use Itineris\Lottery\Taxonomies\Prize;
 use Itineris\Lottery\Taxonomies\Ticket;
+use Itineris\Lottery\Taxonomies\Winner;
 
 class Plugin
 {
@@ -25,6 +26,7 @@ class Plugin
         add_action('init', [Draw::class, 'register']);
         add_action('init', [Prize::class, 'register']);
         add_action('init', [Ticket::class, 'register']);
+        add_action('init', [Winner::class, 'register']);
 
         add_action('admin_menu', [AddNewPage::class, 'removeSubmenuPage']);
         add_action('admin_init', [ImporterPage::class, 'registerSettings']);

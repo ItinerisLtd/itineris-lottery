@@ -10,14 +10,16 @@ class Factory
         $drawRepo = new DrawRepo();
         $prizeRepo = new PrizeRepo();
         $ticketRepo = new TicketRepo();
+        $winnerRepo = new WinnerRepo();
 
-        $resultRepo = new ResultRepo($drawRepo, $prizeRepo, $ticketRepo);
+        $resultRepo = new ResultRepo($drawRepo, $prizeRepo, $ticketRepo, $winnerRepo);
 
         return [
             'resultRepo' => $resultRepo,
             'drawRepo' => $drawRepo,
             'prizeRepo' => $prizeRepo,
             'ticketRepo' => $ticketRepo,
+            'winnerRepo' => $winnerRepo,
         ];
     }
 }

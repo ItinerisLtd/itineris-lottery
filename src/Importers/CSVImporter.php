@@ -28,6 +28,7 @@ class CSVImporter
                 'draw' => $draw,
                 'prize' => $prize,
                 'ticket' => $ticket,
+                'winner' => $winner,
             ] = $record;
 
             if (empty($draw) && empty($prize) && empty($ticket)) {
@@ -35,7 +36,11 @@ class CSVImporter
                 continue;
             }
 
-            $this->resultRepo->findOrCreate($draw, $prize, $ticket);
+            if (empty($winner)) {
+                $winner = __('Anonymous', 'itineris-lottery');
+            }
+
+            $this->resultRepo->findOrCreate($draw, $prize, $ticket, $winner);
             $this->counter->increaseSuccessful();
         }
     }

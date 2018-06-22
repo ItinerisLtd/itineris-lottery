@@ -6,6 +6,7 @@ namespace Itineris\Lottery\Changesets;
 use Itineris\Lottery\Entities\Draw;
 use Itineris\Lottery\Entities\Prize;
 use Itineris\Lottery\Entities\Ticket;
+use Itineris\Lottery\Entities\Winner;
 use Itineris\Lottery\PostTypes\Result;
 
 class CreateResult
@@ -19,18 +20,19 @@ class CreateResult
      */
     private $terms;
 
-    public function __construct(string $title, Draw $draw, Prize $prize, Ticket $ticket)
+    public function __construct(string $title, Draw $draw, Prize $prize, Ticket $ticket, Winner $winner)
     {
         $this->title = $title;
         $this->terms = [
             $draw,
             $prize,
             $ticket,
+            $winner,
         ];
     }
 
     /**
-     * Insert new result record (with draw, prize and ticket) into database.
+     * Insert new result record (with draw, prize, ticket and winner) into database.
      * Warning: This method does not check uniqueness.
      *
      * @return int The post ID on success. The value 0 or WP_Error on failure.

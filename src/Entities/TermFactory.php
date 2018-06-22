@@ -33,6 +33,7 @@ class TermFactory
             Draw::getTaxonomy() => Draw::class,
             Prize::getTaxonomy() => Prize::class,
             Ticket::getTaxonomy() => Ticket::class,
+            Winner::getTaxonomy() => Winner::class,
         ];
     }
 }
