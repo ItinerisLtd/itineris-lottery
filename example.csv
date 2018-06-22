@@ -1,25 +1,25 @@
-draw,prize,ticket
-11-May-2018,GPB 1000 Cash,123456
-11-May-2018,GPB 500 Cash,123457
-11-May-2018,GPB 500 Cash,123458
-11-May-2018,GPB 500 Cash,123459
-11-May-2018,GPB 10 Cash,123460
-11-May-2018,GPB 10 Cash,123461
-11-May-2018,GPB 10 Cash,123462
-11-May-2018,GPB 10 Cash,123463
-11-May-2018,GPB 10 Cash,123464
-11-May-2018,GPB 10 Cash,123465
-11-May-2018,GPB 10 Cash,123466
-11-May-2018,GPB 10 Cash,123467
-18-May-2018,GPB 1000 Cash,123456
-18-May-2018,GPB 500 Cash,223457
-18-May-2018,GPB 500 Cash,223458
-18-May-2018,GPB 500 Cash,223459
-18-May-2018,GPB 10 Cash,223460
-18-May-2018,GPB 10 Cash,223461
-18-May-2018,GPB 10 Cash,223462
-18-May-2018,GPB 10 Cash,223463
-18-May-2018,GPB 10 Cash,223464
+draw,prize,ticket,winner
+11-May-2018,GPB 1000 Cash,123456,A winner in London
+11-May-2018,GPB 500 Cash,123457,A winner in Hull
+11-May-2018,GPB 500 Cash,123458,A winner in Colchester
+11-May-2018,GPB 500 Cash,123459,A winner in Ipswich
+11-May-2018,GPB 10 Cash,123460,A winner in Ipswich
+11-May-2018,GPB 10 Cash,123461,A winner in Ipswich
+11-May-2018,GPB 10 Cash,123462,A winner in Brighton
+11-May-2018,GPB 10 Cash,123463,A winner in Glasgow
+11-May-2018,GPB 10 Cash,123464,A winner in Manchester
+11-May-2018,GPB 10 Cash,123465,A winner in Runcorn
+11-May-2018,GPB 10 Cash,123466,A winner in Bristol
+11-May-2018,GPB 10 Cash,123467,A winner in Leeds
+18-May-2018,GPB 1000 Cash,123456,A winner in London
+18-May-2018,GPB 500 Cash,223457,A winner in London
+18-May-2018,GPB 500 Cash,223458,A winner in Liverpool
+18-May-2018,GPB 500 Cash,223459,A winner in Colchester
+18-May-2018,GPB 10 Cash,223460,A winner in Colchester
+18-May-2018,GPB 10 Cash,223461,A winner in Warrington
+18-May-2018,GPB 10 Cash,223462,A winner in Warrington
+18-May-2018,GPB 10 Cash,223463,A winner in Clacton
+18-May-2018,GPB 10 Cash,223464,A winner in Great Bently
 ,,
 ,,
 18-May-2018,GPB 10 Cash,223465
