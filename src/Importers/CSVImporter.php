@@ -36,9 +36,6 @@ class CSVImporter
                 continue;
             }
 
-            /**
-             * Default winner field value
-             */
             if (empty($winner)) {
                 $winner = __('Anonymous', 'itineris-lottery');
             }
