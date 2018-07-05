@@ -1,10 +1,22 @@
 # Change Log
 
+## [0.4.1](https://github.com/ItinerisLtd/itineris-lottery/tree/0.4.1) (2018-07-05)
+[Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.4.0...0.4.1)
+
+**Closed issues:**
+
+- Column importing is case sensitive [\#29](https://github.com/ItinerisLtd/itineris-lottery/issues/29)
+
+**Merged pull requests:**
+
+- \(fix\) Force columns to lowercase on import [\#30](https://github.com/ItinerisLtd/itineris-lottery/pull/30) ([codepuncher](https://github.com/codepuncher))
+
 ## [0.4.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.4.0) (2018-06-22)
 [Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.3.0...0.4.0)
 
 **Merged pull requests:**
 
+- Version bump 0.4.0 [\#28](https://github.com/ItinerisLtd/itineris-lottery/pull/28) ([codepuncher](https://github.com/codepuncher))
 - Add winner field [\#27](https://github.com/ItinerisLtd/itineris-lottery/pull/27) ([TangRufus](https://github.com/TangRufus))
 
 ## [0.3.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.3.0) (2018-06-13)
