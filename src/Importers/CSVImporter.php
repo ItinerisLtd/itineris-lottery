@@ -24,6 +24,7 @@ class CSVImporter
 
         $records = $reader->getRecords();
         foreach ($records as $record) {
+            $record = array_change_key_case($record, CASE_LOWER);
             [
                 'draw' => $draw,
                 'prize' => $prize,
