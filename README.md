@@ -53,7 +53,7 @@ $ composer require itinerisltd/itineris-lottery
 
 ### Requirements
 
-- The first row must be lowercase headers(`draw,prize,ticket`)
+- The first row must be the headers(`draw,prize,ticket,winner`)
 
 ### Doesn't Matter
 
@@ -63,20 +63,22 @@ $ composer require itinerisltd/itineris-lottery
 
 ### Empty Rows
 
-Totally empty rows(e.g: `,,`) will be ignored.
-You should double check with the exporter whether these empty rows are bugs.
+Rows without `draw,prize,ticket` will be ignored.
+You should double check with the exporter whether these rows are bugs.
 
+`winner` defaults to `Anonymous` if not given.
 
-Rows can't be partially empty.
+Rows must contain `draw,prize,ticket`.
 For example, these rows will make the importation fails:
 ```csv
-draw,prize,ticket
-11-Jan-2018,,
-,GPB 100 Cash,
-,,100002
-18-May-2018,,123456
-18-May-2018,GPB 100 Cash,
-,GPB 100 Cash,200002
+draw,prize,ticket,winner
+11-Jan-2018,,,
+,GPB 100 Cash,,
+,,100002,
+,,,A Winner from Blackpool
+18-May-2018,,123456,
+18-May-2018,GPB 100 Cash,,
+,GPB 100 Cash,200002,
 ```
 
 ### Encoding
@@ -86,23 +88,7 @@ Non UTF-8 characters will either be converted or stripped.
 
 ### Good Example 
 
-```csv
-draw,prize,ticket
-11-Jan-2018,GPB 999 Cash,123456
-11-Jan-2018,GPB 100 Cash,100001
-,,
-,,
-11-Jan-2018,GPB 100 Cash,100002
-18-May-2018,GPB 999 Cash,123456
-18-May-2018,GPB 100 Cash,200001
-18-May-2018,GPB 100 Cash,200002
-Christmas Special,Private Jet x1,123456
-Christmas Special,Trip to Hong Kong,abcd1234
-,,
-Christmas Special,Honda Civic,Santa Claus
-```
-
-See also: [example.csv](./example.csv)
+See: [example.csv](./example.csv)
 
 ## Public API
 
