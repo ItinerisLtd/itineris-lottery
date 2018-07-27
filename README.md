@@ -101,7 +101,7 @@ Although you can **read** them via WordPress functions(e.g: `WP_Query`), you sho
 For **write** operations, only use the followings:
  - the importer page on WP admin dashboard
  - `ResultRepo::findOrCreate`
- - `CSVImporter::import`
+ - `Importer::import`
 
 Do not attempt to insert a result by other methods **including WordPress functions**.
 

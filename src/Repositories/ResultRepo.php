@@ -12,7 +12,7 @@ use WP_Query;
 
 class ResultRepo
 {
-    private const TITLE_SEPARATOR = '|-|';
+    public const TITLE_SEPARATOR = '|-|';
 
     private $drawRepo;
     private $prizeRepo;
