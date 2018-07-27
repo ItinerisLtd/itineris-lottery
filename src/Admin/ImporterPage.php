@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Itineris\Lottery\Admin;
 
 use AdamWathan\Form\FormBuilder;
-use Itineris\Lottery\Importers\Counter;
-use Itineris\Lottery\Importers\Encoder;
-use Itineris\Lottery\Importers\Factory;
+use Itineris\Lottery\CSV\Counter;
+use Itineris\Lottery\CSV\Encoder;
+use Itineris\Lottery\CSV\Factory;
 use Itineris\Lottery\Plugin;
 use Itineris\Lottery\PostTypes\Result;
 use TypistTech\WPBetterSettings\Field;
@@ -163,10 +163,7 @@ class ImporterPage
 
         if ($counter->getIgnored() > 0) {
             // Translators: %1$d is the number of ignored imported rows.
-            $ignoredCountMessageFormat = esc_html__(
-                'Warning: %1$d row(s) ignored because they are totally empty.',
-                'itineris-lottery'
-            );
+            $ignoredCountMessageFormat = esc_html__('Warning: %1$d row(s) ignored.', 'itineris-lottery');
             $message .= '<br />';
             $message .= sprintf(
                 $ignoredCountMessageFormat,

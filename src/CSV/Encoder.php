@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Itineris\Lottery\Importers;
+namespace Itineris\Lottery\CSV;
 
 use ForceUTF8\Encoding;
 use WP_Filesystem_Base;

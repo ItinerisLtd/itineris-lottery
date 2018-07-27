@@ -1,20 +1,26 @@
 <?php
 declare(strict_types=1);
 
-namespace Itineris\Lottery\Importers;
+namespace Itineris\Lottery\CSV;
 
+use Itineris\Lottery\CSV\Transformers\FourColumnTransformer;
 use Itineris\Lottery\Repositories\ResultRepo;
 use League\Csv\Reader;
 
-class CSVImporter
+class Importer
 {
     private $resultRepo;
     private $counter;
+    private $transformer;
+
 
     public function __construct(ResultRepo $resultRepo, Counter $counter)
     {
         $this->resultRepo = $resultRepo;
         $this->counter = $counter;
+
+        // TODO: Extend me!
+        $this->transformer = new FourColumnTransformer();
     }
 
     public function import(string $path): void
@@ -22,26 +28,24 @@ class CSVImporter
         $reader = Reader::createFromPath($path);
         $reader->setHeaderOffset(0);
 
-        $records = $reader->getRecords();
-        foreach ($records as $record) {
-            $record = array_change_key_case($record, CASE_LOWER);
-            [
-                'draw' => $draw,
-                'prize' => $prize,
-                'ticket' => $ticket,
-                'winner' => $winner,
-            ] = $record;
+        $rows = $reader->getRecords();
+        foreach ($rows as $row) {
+            $row = array_change_key_case($row, CASE_LOWER);
 
-            if (empty($draw) && empty($prize) && empty($ticket)) {
+            $record = $this->transformer->toRecord($row);
+
+            if (null === $record) {
                 $this->counter->increaseIgnored();
                 continue;
             }
 
-            if (empty($winner)) {
-                $winner = __('Anonymous', 'itineris-lottery');
-            }
+            $this->resultRepo->findOrCreate(
+                $record->getDrawName(),
+                $record->getPrizeName(),
+                $record->getTicketName(),
+                $record->getWinnerName()
+            );
 
-            $this->resultRepo->findOrCreate($draw, $prize, $ticket, $winner);
             $this->counter->increaseSuccessful();
         }
     }
