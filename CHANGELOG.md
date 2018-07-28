@@ -1,5 +1,14 @@
 # Change Log
 
+## [0.5.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.5.0) (2018-07-29)
+[Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.4.1...0.5.0)
+
+**Merged pull requests:**
+
+- New feature: Allow custom transformers [\#34](https://github.com/ItinerisLtd/itineris-lottery/pull/34) ([TangRufus](https://github.com/TangRufus))
+- Refactor importer [\#33](https://github.com/ItinerisLtd/itineris-lottery/pull/33) ([TangRufus](https://github.com/TangRufus))
+- Update README.md [\#32](https://github.com/ItinerisLtd/itineris-lottery/pull/32) ([TangRufus](https://github.com/TangRufus))
+
 ## [0.4.1](https://github.com/ItinerisLtd/itineris-lottery/tree/0.4.1) (2018-07-05)
 [Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.4.0...0.4.1)
 
@@ -9,6 +18,7 @@
 
 **Merged pull requests:**
 
+- Version bump 0.4.1 [\#31](https://github.com/ItinerisLtd/itineris-lottery/pull/31) ([codepuncher](https://github.com/codepuncher))
 - \(fix\) Force columns to lowercase on import [\#30](https://github.com/ItinerisLtd/itineris-lottery/pull/30) ([codepuncher](https://github.com/codepuncher))
 
 ## [0.4.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.4.0) (2018-06-22)
