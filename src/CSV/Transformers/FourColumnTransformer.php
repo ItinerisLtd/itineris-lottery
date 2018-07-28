@@ -4,12 +4,19 @@ declare(strict_types=1);
 namespace Itineris\Lottery\CSV\Transformers;
 
 use Itineris\Lottery\CSV\Record;
+use Itineris\Lottery\CSV\TransformerCollection;
 
 final class FourColumnTransformer implements TransformerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
+    public static function register(TransformerCollection $transformerCollection): void
+    {
+        $transformerCollection->add(
+            'default',
+            __('Default - 4-column: draw,prize,ticket,winner', 'itineris-lottery'),
+            new static()
+        );
+    }
+
     public function toRecord(array $row): ?Record
     {
         [

@@ -3,24 +3,21 @@ declare(strict_types=1);
 
 namespace Itineris\Lottery\CSV;
 
-use Itineris\Lottery\CSV\Transformers\FourColumnTransformer;
+use Itineris\Lottery\CSV\Transformers\TransformerInterface;
 use Itineris\Lottery\Repositories\ResultRepo;
 use League\Csv\Reader;
 
 class Importer
 {
+    private $transformer;
     private $resultRepo;
     private $counter;
-    private $transformer;
 
-
-    public function __construct(ResultRepo $resultRepo, Counter $counter)
+    public function __construct(TransformerInterface $transformer, ResultRepo $resultRepo, Counter $counter)
     {
+        $this->transformer = $transformer;
         $this->resultRepo = $resultRepo;
         $this->counter = $counter;
-
-        // TODO: Extend me!
-        $this->transformer = new FourColumnTransformer();
     }
 
     public function import(string $path): void
