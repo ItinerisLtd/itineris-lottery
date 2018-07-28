@@ -7,15 +7,20 @@ use AdamWathan\Form\FormBuilder;
 use Itineris\Lottery\CSV\Counter;
 use Itineris\Lottery\CSV\Encoder;
 use Itineris\Lottery\CSV\Factory;
+use Itineris\Lottery\CSV\TransformerCollection;
+use Itineris\Lottery\CSV\Transformers\TransformerInterface;
 use Itineris\Lottery\Plugin;
 use Itineris\Lottery\PostTypes\Result;
+use TypistTech\WPBetterSettings\Builder;
 use TypistTech\WPBetterSettings\Field;
 use TypistTech\WPBetterSettings\Registrar;
 use TypistTech\WPBetterSettings\Section;
+use TypistTech\WPOptionStore\Factory as OptionStoreFactory;
 
 class ImporterPage
 {
     private const SLUG = Plugin::PREFIX . 'csv_importer';
+    public const CSV_FORMAT_OPTION_ID = Plugin::PREFIX . 'csv_format';
     public const CSV_FILE_OPTION_ID = Plugin::PREFIX . 'csv_file';
 
     public static function registerSettings(): void
@@ -25,15 +30,26 @@ class ImporterPage
             __('Import results via CSV file', 'itineris-lottery')
         );
 
+        $builder = new Builder(
+            OptionStoreFactory::build()
+        );
+
+        // Because wp-better-settings does not support file field yet.
         $formBuilder = new FormBuilder();
-        $fileField = $formBuilder->file(self::CSV_FILE_OPTION_ID);
-        $fileField->id(self::CSV_FILE_OPTION_ID);
+
+        $transformerCollection = TransformerCollection::make();
 
         $section->add(
+            $builder->select(
+                self::CSV_FORMAT_OPTION_ID,
+                __('CSV Format', 'itineris-lottery'),
+                $transformerCollection->toSelect()
+            ),
             new Field(
                 self::CSV_FILE_OPTION_ID,
                 __('CSV File', 'itineris-lottery'),
-                $fileField,
+                $formBuilder->file(self::CSV_FILE_OPTION_ID)
+                            ->id(self::CSV_FILE_OPTION_ID),
                 []
             )
         );
@@ -64,8 +80,20 @@ class ImporterPage
         );
     }
 
-    public static function handleFormSubmit($_input, $oldValue)
+    public static function handleFormSubmit(): void
     {
+        [
+            'error' => $message,
+            'success' => $formatSuccess,
+            'transformer' => $transformer,
+        ] = self::handleFormat();
+
+        if (! $formatSuccess) {
+            add_settings_error(self::SLUG, esc_attr('settings_updated'), $message, 'error');
+
+            return;
+        }
+
         [
             'error' => $message,
             'success' => $uploadSuccess,
@@ -73,7 +101,7 @@ class ImporterPage
         ] = self::handleUpload();
 
         if ($uploadSuccess) {
-            $message = self::encodeAndImport($csvFilePath);
+            $message = self::encodeAndImport($csvFilePath, $transformer);
         }
 
         add_settings_error(
@@ -82,8 +110,35 @@ class ImporterPage
             $message,
             $uploadSuccess ? 'updated' : 'error'
         );
+    }
 
-        return $oldValue;
+    private static function handleFormat(): array
+    {
+        $transformerCollection = TransformerCollection::make();
+
+        if (empty($_POST[self::CSV_FORMAT_OPTION_ID])) { // Input var okay.
+            return [
+                'success' => false,
+                'error' => 'CSV format not given.',
+                'transformer' => null,
+            ];
+        }
+
+        $csvFormat = sanitize_key($_POST[self::CSV_FORMAT_OPTION_ID]); // Input var okay.
+
+        if (! $transformerCollection->has($csvFormat)) {
+            return [
+                'success' => false,
+                'error' => 'Unknown CSV format: ' . $csvFormat . '.',
+                'transformer' => null,
+            ];
+        }
+
+        return [
+            'success' => true,
+            'error' => null,
+            'transformer' => $transformerCollection->get($csvFormat),
+        ];
     }
 
     private static function handleUpload(): array
@@ -127,11 +182,11 @@ class ImporterPage
         ];
     }
 
-    private static function encodeAndImport($csvPath): string
+    private static function encodeAndImport($csvPath, TransformerInterface $transformer): string
     {
         $isEncoded = Encoder::forceUFT8($csvPath);
 
-        $csvImporter = Factory::make();
+        $csvImporter = Factory::make($transformer);
         $csvImporter->import($csvPath);
 
         return self::getMessage(

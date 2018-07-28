@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Itineris\Lottery\CSV;
 
+use Itineris\Lottery\CSV\Transformers\TransformerInterface;
 use Itineris\Lottery\Repositories\Factory as RepoFactory;
 
 class Factory
 {
-    public static function make(): Importer
+    public static function make(TransformerInterface $transformer): Importer
     {
         [
             'resultRepo' => $resultRepo,
@@ -16,6 +17,6 @@ class Factory
 
         $counter = new Counter();
 
-        return new Importer($resultRepo, $counter);
+        return new Importer($transformer, $resultRepo, $counter);
     }
 }
