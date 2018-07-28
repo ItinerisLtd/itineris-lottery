@@ -9,11 +9,9 @@ Custom post type for lottery results
 - [Minimum Requirements](#minimum-requirements)
 - [Installation](#installation)
 - [CSV Importer](#csv-importer)
-  - [Requirements](#requirements)
-  - [Doesn't Matter](#doesnt-matter)
-  - [Empty Rows](#empty-rows)
   - [Encoding](#encoding)
-  - [Good Example](#good-example)
+  - [Default Transformer: 4-column](#default-transformer-4-column)
+  - [Custom Transformer](#custom-transformer)
 - [Public API](#public-api)
   - [Rules](#rules)
   - [Initializing Repositories](#initializing-repositories)
@@ -28,7 +26,7 @@ Custom post type for lottery results
 
 ## Minimum Requirements
 
-- PHP v7.1
+- PHP v7.2
 - WordPress v4.9.5
 
 ## Installation
@@ -51,51 +49,54 @@ $ composer require itinerisltd/itineris-lottery
 
 ## CSV Importer
 
-### Requirements
-
-- The first row must be the headers(`draw,prize,ticket,winner`)
-
-### Doesn't Matter
-
-- Column ordering
-- Row ordering
-- Separator
-
-### Empty Rows
-
-Rows without `draw,prize,ticket` will be ignored.
-You should double check with the exporter whether these rows are bugs.
-
-`winner` defaults to `Anonymous` if not given.
-
-Rows must contain `draw,prize,ticket`.
-For example, these rows will make the importation fails:
-```csv
-draw,prize,ticket,winner
-11-Jan-2018,,,
-,GPB 100 Cash,,
-,,100002,
-,,,A Winner from Blackpool
-18-May-2018,,123456,
-18-May-2018,GPB 100 Cash,,
-,GPB 100 Cash,200002,
-```
-
 ### Encoding
 
-Preferred encoding is `UTF-8`. 
+Preferred encoding is `UTF-8`.
 Non UTF-8 characters will either be converted or stripped.
 
-### Good Example 
+### Default Transformer: 4-column
+
+- The first row must be the headers(`draw,prize,ticket,winner`)
+- Rows must contain `draw,prize,ticket`
+- Rows without `draw,prize,ticket` will be ignored. You should double check with the exporter whether these rows are bugs
+- `winner` defaults to `Anonymous` if not given.
 
 See: [example.csv](./example.csv)
+
+### Custom Transformer
+
+A transformer turns a single CSV row into a [CSV\Record](./src/CSV/Record.php). Define custom transformers when clients refuse to export in 4-column format.
+
+1. Read the comments in [TransformerInterface](./src/CSV/Transformers/TransformerInterface.php)
+1. Read the expected string formats of [CSV\Record::__constructor](./src/CSV/Record.php)
+1. Implement [TransformerInterface](./src/CSV/Transformers/TransformerInterface.php)
+    ```php
+    class MyCustomTransformer implements Itineris\Lottery\CSV\Transformers\TransformerInterfacerface
+    {
+      // Implement TransformerInterface
+    }
+    ```
+1. Register the custom transformer
+    ```php
+    add_action(Itineris\Lottery\Plugin::PREFIX . 'register_transformers', function (Itineris\Lottery\CSV\TransformerCollection $transformerCollection) {
+        $transformerCollection->add(
+            'my-example-transformer-123', // Unique ID: Use lower-case alphabet, digits and hyphens only
+            'Example - I am description' // Human-readable description.
+            new MyCustomTransformer()
+        );
+    });
+    ```
+
+Examples:
+ - [FourColumnTransformer](src/CSV/Transformers/FourColumnTransformer.php)
+ - [custom-transformer-example](https://github.com/ItinerisLtd/itineris-lottery-custom-transformer-example)
 
 ## Public API
 
 ### Rules
 
-Draws, prizes, tickets and results are custom taxonomies and custom post type. 
-Although you can **read** them via WordPress functions(e.g: `WP_Query`), you should prefer using [`Repositories`](./src/Repositories) over WordPress functions. 
+Draws, prizes, tickets and results are custom taxonomies and custom post type.
+Although you can **read** them via WordPress functions(e.g: `WP_Query`), you should prefer using [`Repositories`](./src/Repositories) over WordPress functions.
 
 
 For **write** operations, only use the followings:
@@ -125,7 +126,7 @@ use Itineris\Lottery\Repositories\Factory;
 
 ```php
 $draw = $drawRepo->findByName('Christmas Special');
-// If 'Christmas Special' doesn't exist, $draw === null 
+// If 'Christmas Special' doesn't exist, $draw === null
 // Otherwise, $draw is an Entities\Draw instance.
 
 $draw->getName();
@@ -199,9 +200,9 @@ $result->getTicketName();
 
 - Less than 100 results per draw
 - Less than 500 rows per file when using the CSV importer page
-- A caching plugin is caching `WP_Query`([Advanced Post Cache](https://github.com/Automattic/advanced-post-cache/) caches all queries by this plugin) 
+- A caching plugin is caching `WP_Query`([Advanced Post Cache](https://github.com/Automattic/advanced-post-cache/) caches all queries by this plugin)
 
-These are not hard limits. 
+These are not hard limits.
 Maximum number of results per draw and rows per CSV file depends on server resources and configurations.
 
 ## Capabilities
