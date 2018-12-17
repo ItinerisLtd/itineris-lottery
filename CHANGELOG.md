@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Version bump 0.5.1 [\#38](https://github.com/ItinerisLtd/itineris-lottery/pull/38) ([TangRufus](https://github.com/TangRufus))
 - Change CSV importer page permission to `'publish\_' . Result::POST\_TYPE` [\#37](https://github.com/ItinerisLtd/itineris-lottery/pull/37) ([TangRufus](https://github.com/TangRufus))
 - Update example.csv [\#36](https://github.com/ItinerisLtd/itineris-lottery/pull/36) ([TangRufus](https://github.com/TangRufus))
 
