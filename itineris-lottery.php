@@ -3,7 +3,7 @@
  * Plugin Name:     Itineris Lottery
  * Plugin URI:      https://www.itineris.co.uk/
  * Description:     Custom post type for lottery results
- * Version:         0.5.0
+ * Version:         0.5.1
  * Author:          Itineris Limited
  * Author URI:      https://www.itineris.co.uk/
  * Text Domain:     itineris-lottery
