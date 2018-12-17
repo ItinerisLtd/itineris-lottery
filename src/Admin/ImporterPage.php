@@ -64,7 +64,7 @@ class ImporterPage
             'edit.php?post_type=' . Result::POST_TYPE,
             __('CSV Importer', 'itineris-lottery'),
             __('CSV Importer', 'itineris-lottery'),
-            'manage_options',
+            'publish_' . Result::POST_TYPE,
             self::SLUG,
             function () {
                 echo '<div class="wrap">';
