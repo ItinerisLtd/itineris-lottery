@@ -1,10 +1,19 @@
 # Change Log
 
-## [0.5.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.5.0) (2018-07-29)
+## [0.5.1](https://github.com/ItinerisLtd/itineris-lottery/tree/0.5.1) (2018-12-17)
+[Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.5.0...0.5.1)
+
+**Merged pull requests:**
+
+- Change CSV importer page permission to `'publish\_' . Result::POST\_TYPE` [\#37](https://github.com/ItinerisLtd/itineris-lottery/pull/37) ([TangRufus](https://github.com/TangRufus))
+- Update example.csv [\#36](https://github.com/ItinerisLtd/itineris-lottery/pull/36) ([TangRufus](https://github.com/TangRufus))
+
+## [0.5.0](https://github.com/ItinerisLtd/itineris-lottery/tree/0.5.0) (2018-07-28)
 [Full Changelog](https://github.com/ItinerisLtd/itineris-lottery/compare/0.4.1...0.5.0)
 
 **Merged pull requests:**
 
+- Version bump 0.5.0 [\#35](https://github.com/ItinerisLtd/itineris-lottery/pull/35) ([TangRufus](https://github.com/TangRufus))
 - New feature: Allow custom transformers [\#34](https://github.com/ItinerisLtd/itineris-lottery/pull/34) ([TangRufus](https://github.com/TangRufus))
 - Refactor importer [\#33](https://github.com/ItinerisLtd/itineris-lottery/pull/33) ([TangRufus](https://github.com/TangRufus))
 - Update README.md [\#32](https://github.com/ItinerisLtd/itineris-lottery/pull/32) ([TangRufus](https://github.com/TangRufus))
